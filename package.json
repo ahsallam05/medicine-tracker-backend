@@ -1,0 +1,37 @@
+{
+  "name": "medicine-tracker",
+  "version": "1.0.0",
+  "description": "Medicine Expiry Date Tracking System - Backend API",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "seed": "node src/utils/seed.js",
+    "seed:mock": "node src/utils/seed_mock_data.js",
+    "build": "echo 'No build step needed for Node.js backend'",
+    "test": "echo 'Tests not implemented in this version'"
+  },
+  "keywords": [
+    "pharmacy",
+    "medicine",
+    "expiry",
+    "tracking"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.10.0",
+    "helmet": "^7.0.0",
+    "joi": "^17.10.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
