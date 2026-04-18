@@ -1,8 +1,8 @@
 /*
   Database Seeder
 
-  On first startup, this script checks if an admin account exists.
-  If not, it creates one using credentials from environment variables.
+  Clears all existing data and creates a fresh admin account.
+  WARNING: This will DELETE all existing data!
 
   Run with: npm run seed
 */
@@ -16,18 +16,25 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 async function seedDatabase() {
   try {
-    console.log('Starting database seeding...');
+    console.log('Starting database seeding...\n');
 
-    const existingAdmin = await Database.queryOne(
-      `SELECT id FROM users WHERE role = $1 AND username = $2`,
-      ['admin', ADMIN_USERNAME]
-    );
+    // ============================================================================
+    // CLEAR ALL EXISTING DATA
+    // ============================================================================
+    console.log('🗑️  Clearing existing data...');
 
-    if (existingAdmin) {
-      console.log(`✓ Admin account "${ADMIN_USERNAME}" already exists. Skipping seed.`);
-      await Database.close();
-      process.exit(0);
-    }
+    // Delete medicines first (due to foreign key constraint)
+    await Database.query('DELETE FROM medicines');
+    console.log('   ✓ Cleared medicines table');
+
+    // Delete all users
+    await Database.query('DELETE FROM users');
+    console.log('   ✓ Cleared users table');
+
+    // Reset sequences to start from 1
+    await Database.query('ALTER SEQUENCE medicines_id_seq RESTART WITH 1');
+    await Database.query('ALTER SEQUENCE users_id_seq RESTART WITH 1');
+    console.log('   ✓ Reset ID sequences\n');
 
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, saltRounds);

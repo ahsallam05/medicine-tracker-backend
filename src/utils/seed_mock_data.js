@@ -62,56 +62,56 @@ async function seedMockData() {
       // ---------------------------------------------------------------------------
       // EXPIRED MEDICINES (5 items - expiry in the past)
       // ---------------------------------------------------------------------------
-      { name: 'Expired Panadol Extra', quantity: 50, expiry: 'CURRENT_DATE - INTERVAL \'10 days\'', category: 'Painkiller' },
-      { name: 'Expired Amoxicillin 500mg', quantity: 0, expiry: 'CURRENT_DATE - INTERVAL \'15 days\'', category: 'Antibiotic' },
-      { name: 'Expired Ibuprofen 400mg', quantity: 5, expiry: 'CURRENT_DATE - INTERVAL \'20 days\'', category: 'Painkiller' },
-      { name: 'Expired Vitamin C 1000mg', quantity: 30, expiry: 'CURRENT_DATE - INTERVAL \'5 days\'', category: 'Vitamin' },
-      { name: 'Expired Omeprazole 20mg', quantity: 0, expiry: 'CURRENT_DATE - INTERVAL \'30 days\'', category: 'Antacid' },
+      { name: 'Panadol Extra', quantity: 50, expiry: 'CURRENT_DATE - INTERVAL \'10 days\'', category: 'Painkiller' },
+      { name: 'Amoxicillin 500mg', quantity: 0, expiry: 'CURRENT_DATE - INTERVAL \'15 days\'', category: 'Antibiotic' },
+      { name: 'Ibuprofen 400mg', quantity: 5, expiry: 'CURRENT_DATE - INTERVAL \'20 days\'', category: 'Painkiller' },
+      { name: 'Vitamin C 1000mg', quantity: 30, expiry: 'CURRENT_DATE - INTERVAL \'5 days\'', category: 'Vitamin' },
+      { name: 'Omeprazole 20mg', quantity: 0, expiry: 'CURRENT_DATE - INTERVAL \'30 days\'', category: 'Antacid' },
 
       // ---------------------------------------------------------------------------
       // CRITICAL MEDICINES (5 items - expiry within 7 days)
       // ---------------------------------------------------------------------------
-      { name: 'Critical Paracetamol', quantity: 100, expiry: 'CURRENT_DATE + INTERVAL \'2 days\'', category: 'Painkiller' },
-      { name: 'Critical Azithromycin', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'5 days\'', category: 'Antibiotic' },
-      { name: 'Critical Oseltamivir', quantity: 8, expiry: 'CURRENT_DATE + INTERVAL \'3 days\'', category: 'Antiviral' },
-      { name: 'Critical Vitamin D3', quantity: 45, expiry: 'CURRENT_DATE + INTERVAL \'7 days\'', category: 'Vitamin' },
-      { name: 'Critical Ranitidine', quantity: 3, expiry: 'CURRENT_DATE + INTERVAL \'4 days\'', category: 'Antacid' },
+      { name: 'Paracetamol', quantity: 100, expiry: 'CURRENT_DATE + INTERVAL \'2 days\'', category: 'Painkiller' },
+      { name: 'Azithromycin', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'5 days\'', category: 'Antibiotic' },
+      { name: 'Oseltamivir', quantity: 8, expiry: 'CURRENT_DATE + INTERVAL \'3 days\'', category: 'Antiviral' },
+      { name: 'Vitamin D3', quantity: 45, expiry: 'CURRENT_DATE + INTERVAL \'7 days\'', category: 'Vitamin' },
+      { name: 'Ranitidine', quantity: 3, expiry: 'CURRENT_DATE + INTERVAL \'4 days\'', category: 'Antacid' },
 
       // ---------------------------------------------------------------------------
       // EXPIRING SOON MEDICINES (5 items - expiry within 8-30 days)
       // ---------------------------------------------------------------------------
-      { name: 'Expiring Aspirin', quantity: 80, expiry: 'CURRENT_DATE + INTERVAL \'15 days\'', category: 'Painkiller' },
-      { name: 'Expiring Ciprofloxacin', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'20 days\'', category: 'Antibiotic' },
-      { name: 'Expiring Acyclovir', quantity: 6, expiry: 'CURRENT_DATE + INTERVAL \'25 days\'', category: 'Antiviral' },
-      { name: 'Expiring Vitamin B Complex', quantity: 120, expiry: 'CURRENT_DATE + INTERVAL \'30 days\'', category: 'Vitamin' },
-      { name: 'Expiring Pantoprazole', quantity: 2, expiry: 'CURRENT_DATE + INTERVAL \'12 days\'', category: 'Antacid' },
+      { name: 'Aspirin', quantity: 80, expiry: 'CURRENT_DATE + INTERVAL \'15 days\'', category: 'Painkiller' },
+      { name: 'Ciprofloxacin', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'20 days\'', category: 'Antibiotic' },
+      { name: 'Acyclovir', quantity: 6, expiry: 'CURRENT_DATE + INTERVAL \'25 days\'', category: 'Antiviral' },
+      { name: 'Vitamin B Complex', quantity: 120, expiry: 'CURRENT_DATE + INTERVAL \'30 days\'', category: 'Vitamin' },
+      { name: 'Pantoprazole', quantity: 2, expiry: 'CURRENT_DATE + INTERVAL \'12 days\'', category: 'Antacid' },
 
       // ---------------------------------------------------------------------------
       // GOOD STOCK MEDICINES (5 items - expiry far in the future)
       // ---------------------------------------------------------------------------
-      { name: 'Good Stock Diclofenac', quantity: 200, expiry: 'CURRENT_DATE + INTERVAL \'180 days\'', category: 'Painkiller' },
-      { name: 'Good Stock Doxycycline', quantity: 150, expiry: 'CURRENT_DATE + INTERVAL \'200 days\'', category: 'Antibiotic' },
-      { name: 'Good Stock Valacyclovir', quantity: 75, expiry: 'CURRENT_DATE + INTERVAL \'150 days\'', category: 'Antiviral' },
-      { name: 'Good Stock Multivitamin', quantity: 500, expiry: 'CURRENT_DATE + INTERVAL \'365 days\'', category: 'Vitamin' },
-      { name: 'Good Stock Esomeprazole', quantity: 100, expiry: 'CURRENT_DATE + INTERVAL \'120 days\'', category: 'Antacid' },
+      { name: 'Diclofenac', quantity: 200, expiry: 'CURRENT_DATE + INTERVAL \'180 days\'', category: 'Painkiller' },
+      { name: 'Doxycycline', quantity: 150, expiry: 'CURRENT_DATE + INTERVAL \'200 days\'', category: 'Antibiotic' },
+      { name: 'Valacyclovir', quantity: 75, expiry: 'CURRENT_DATE + INTERVAL \'150 days\'', category: 'Antiviral' },
+      { name: 'Multivitamin', quantity: 500, expiry: 'CURRENT_DATE + INTERVAL \'365 days\'', category: 'Vitamin' },
+      { name: 'Esomeprazole', quantity: 100, expiry: 'CURRENT_DATE + INTERVAL \'120 days\'', category: 'Antacid' },
 
       // ---------------------------------------------------------------------------
       // OUT OF STOCK MEDICINES (5 items - quantity = 0, good expiry)
       // ---------------------------------------------------------------------------
-      { name: 'Out of Stock Ketoprofen', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'90 days\'', category: 'Painkiller' },
-      { name: 'Out of Stock Clarithromycin', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'60 days\'', category: 'Antibiotic' },
-      { name: 'Out of Stock Zanamivir', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'100 days\'', category: 'Antiviral' },
-      { name: 'Out of Stock Vitamin E', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'240 days\'', category: 'Vitamin' },
-      { name: 'Out of Stock Lansoprazole', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'180 days\'', category: 'Antacid' },
+      { name: 'Ketoprofen', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'90 days\'', category: 'Painkiller' },
+      { name: 'Clarithromycin', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'60 days\'', category: 'Antibiotic' },
+      { name: 'Zanamivir', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'100 days\'', category: 'Antiviral' },
+      { name: 'Vitamin E', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'240 days\'', category: 'Vitamin' },
+      { name: 'Lansoprazole', quantity: 0, expiry: 'CURRENT_DATE + INTERVAL \'180 days\'', category: 'Antacid' },
 
       // ---------------------------------------------------------------------------
       // RUNNING LOW MEDICINES (5 items - quantity between 1-10, good expiry)
       // ---------------------------------------------------------------------------
-      { name: 'Low Stock Naproxen', quantity: 4, expiry: 'CURRENT_DATE + INTERVAL \'200 days\'', category: 'Painkiller' },
-      { name: 'Low Stock Metronidazole', quantity: 7, expiry: 'CURRENT_DATE + INTERVAL \'90 days\'', category: 'Antibiotic' },
-      { name: 'Low Stock Rimantadine', quantity: 2, expiry: 'CURRENT_DATE + INTERVAL \'110 days\'', category: 'Antiviral' },
-      { name: 'Low Stock Vitamin B12', quantity: 9, expiry: 'CURRENT_DATE + INTERVAL \'300 days\'', category: 'Vitamin' },
-      { name: 'Low Stock Famotidine', quantity: 1, expiry: 'CURRENT_DATE + INTERVAL \'150 days\'', category: 'Antacid' }
+      { name: 'Naproxen', quantity: 4, expiry: 'CURRENT_DATE + INTERVAL \'200 days\'', category: 'Painkiller' },
+      { name: 'Metronidazole', quantity: 7, expiry: 'CURRENT_DATE + INTERVAL \'90 days\'', category: 'Antibiotic' },
+      { name: 'Rimantadine', quantity: 2, expiry: 'CURRENT_DATE + INTERVAL \'110 days\'', category: 'Antiviral' },
+      { name: 'Vitamin B12', quantity: 9, expiry: 'CURRENT_DATE + INTERVAL \'300 days\'', category: 'Vitamin' },
+      { name: 'Famotidine', quantity: 1, expiry: 'CURRENT_DATE + INTERVAL \'150 days\'', category: 'Antacid' }
     ];
 
     let count = 0;
