@@ -26,12 +26,14 @@ class MedicineService {
       search = '',
       category = '',
       status = '', // 'expired', 'active'
+      sortBy = 'id',
+      order = 'asc',
     } = queryParams;
 
     const offset = (page - 1) * limit;
 
     const [medicines, total] = await Promise.all([
-      MedicineRepository.findAll({ search, category, status, limit, offset }),
+      MedicineRepository.findAll({ search, category, status, sortBy, order, limit, offset }),
       MedicineRepository.count({ search, category, status }),
     ]);
 
