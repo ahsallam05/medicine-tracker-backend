@@ -54,6 +54,21 @@ class AdminController {
       next(error);
     }
   }
+
+  static async updatePharmacist(req, res, next) {
+    try {
+      const { id } = req.params;
+      const adminId = req.user.id;
+      const updated = await AdminService.updatePharmacist(id, adminId, req.body);
+      res.status(200).json({
+        status: 'success',
+        message: 'Pharmacist updated successfully',
+        data: updated,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default AdminController;

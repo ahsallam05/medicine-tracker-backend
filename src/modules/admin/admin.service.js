@@ -58,6 +58,48 @@ class AdminService {
 
     return await UserRepository.delete(id);
   }
+
+  static async updatePharmacist(id, adminId, updateData) {
+    // Check if trying to edit yourself
+    if (parseInt(id, 10) === adminId) {
+      const error = new Error('Cannot edit your own account');
+      error.status = 400;
+      throw error;
+    }
+
+    // Find the user to update
+    const user = await UserRepository.findById(id);
+    if (!user) {
+      const error = new Error('Pharmacist not found');
+      error.status = 404;
+      throw error;
+    }
+
+    // Check if trying to edit an admin
+    if (user.role === 'admin') {
+      const error = new Error('Cannot edit admin accounts');
+      error.status = 400;
+      throw error;
+    }
+
+    // If username is being changed, check for duplicates
+    if (updateData.username && updateData.username !== user.username) {
+      const existingUser = await UserRepository.findByUsername(updateData.username);
+      if (existingUser) {
+        const error = new Error('Username already taken');
+        error.status = 409;
+        throw error;
+      }
+    }
+
+    // If password is provided, hash it
+    const dataToUpdate = { ...updateData };
+    if (dataToUpdate.password) {
+      dataToUpdate.password = await bcrypt.hash(dataToUpdate.password, 10);
+    }
+
+    return await UserRepository.update(id, dataToUpdate);
+  }
 }
 
 export default AdminService;

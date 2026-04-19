@@ -46,6 +46,44 @@ class UserRepository {
     const result = await Database.query(sql, [id]);
     return result.rowCount > 0;
   }
+
+  static async update(id, updateData) {
+    const fields = [];
+    const values = [];
+    let counter = 1;
+
+    // Build dynamic update query
+    if (updateData.name !== undefined) {
+      fields.push(`name = $${counter}`);
+      values.push(updateData.name);
+      counter++;
+    }
+    if (updateData.username !== undefined) {
+      fields.push(`username = $${counter}`);
+      values.push(updateData.username);
+      counter++;
+    }
+    if (updateData.password !== undefined) {
+      fields.push(`password = $${counter}`);
+      values.push(updateData.password);
+      counter++;
+    }
+
+    // Add updated_at timestamp
+    fields.push('updated_at = CURRENT_TIMESTAMP');
+
+    // Add id to values array
+    values.push(id);
+
+    const sql = `
+      UPDATE users
+      SET ${fields.join(', ')}
+      WHERE id = $${counter}
+      RETURNING id, name, username, role, is_active, created_at, updated_at
+    `;
+
+    return await Database.queryOne(sql, values);
+  }
 }
 
 export default UserRepository;

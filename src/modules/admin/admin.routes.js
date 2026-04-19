@@ -17,6 +17,16 @@ const toggleStatusSchema = Joi.object({
   is_active: Joi.boolean().required(),
 });
 
+const updatePharmacistSchema = Joi.object({
+  name: Joi.string().trim().min(2).max(100),
+  username: Joi.string().pattern(/^[a-zA-Z0-9_-]+$/).trim().min(2).max(50).messages({
+    'string.pattern.base': 'Username can only contain letters, numbers, underscores, and hyphens',
+  }),
+  password: Joi.string().min(6),
+}).min(1).messages({
+  'object.min': 'At least one field must be provided for update',
+});
+
 // Apply authentication and admin-only authorization to all admin routes
 router.use(authenticate);
 router.use(authorize(['admin']));
@@ -32,5 +42,8 @@ router.patch('/pharmacists/:id/status', validate(toggleStatusSchema), AdminContr
 
 // Delete pharmacist account
 router.delete('/pharmacists/:id', AdminController.deletePharmacist);
+
+// Update pharmacist account
+router.put('/pharmacists/:id', validate(updatePharmacistSchema), AdminController.updatePharmacist);
 
 export default router;
