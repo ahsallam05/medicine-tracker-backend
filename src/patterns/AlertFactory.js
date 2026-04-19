@@ -15,6 +15,7 @@ class Alert {
   constructor(medicine, type, severity, message) {
     this.medicine_id = medicine.id;
     this.medicine_name = medicine.name;
+    this.category = medicine.category;
     this.type = type;
     this.severity = severity;
     this.message = message;
