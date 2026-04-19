@@ -20,6 +20,6 @@ export const querySchema = Joi.object({
   search: Joi.string().allow('').trim(),
   category: Joi.string().allow('').trim(),
   status: Joi.string().valid('expired', 'active', '').default(''),
-  sortBy: Joi.string().valid('name', 'expiry_date', 'quantity', 'created_at').default('created_at'),
-  order: Joi.string().valid('asc', 'desc').default('desc'),
+  sortBy: Joi.string().valid('id', 'name', 'quantity', 'expiry_date', 'category', 'created_at').default('id'),
+  order: Joi.string().valid('asc', 'desc').default('asc'),
 });

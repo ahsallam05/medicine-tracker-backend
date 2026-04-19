@@ -115,11 +115,31 @@ The API will be available at `http://localhost:3000`
 ### Medicines (Admin & Pharmacist)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/medicines` | List all medicines (with filters, search, pagination) |
+| GET | `/api/medicines` | List all medicines (with filters, search, sorting, pagination) |
 | POST | `/api/medicines` | Create a new medicine |
 | GET | `/api/medicines/:id` | Get medicine details |
 | PUT | `/api/medicines/:id` | Update medicine |
 | DELETE | `/api/medicines/:id` | Delete medicine |
+
+#### Query Parameters for GET /api/medicines
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `page` | integer | 1 | Page number |
+| `limit` | integer | 10 | Items per page (max 100) |
+| `search` | string | - | Search by name or category (case-insensitive) |
+| `category` | string | - | Filter by exact category |
+| `status` | string | - | Filter by `expired` or `active` |
+| `sortBy` | string | `id` | Sort field: `id`, `name`, `quantity`, `expiry_date`, `category`, `created_at` |
+| `order` | string | `asc` | Sort order: `asc` or `desc` |
+
+**Examples:**
+- `?sortBy=expiry_date&order=asc` → Soonest expiry first
+- `?sortBy=expiry_date&order=desc` → Latest expiry first
+- `?sortBy=category&order=asc` → Alphabetical by category
+- `?sortBy=quantity&order=asc` → Lowest stock first
+- `?sortBy=created_at&order=desc` → Newest medicines first
+- `?search=panadol&sortBy=name&order=asc` → Search and sort results
 
 ### Alerts (Admin & Pharmacist)
 | Method | Endpoint | Description |
@@ -137,6 +157,7 @@ The API will be available at `http://localhost:3000`
 | GET | `/api/admin/pharmacists` | List all pharmacists |
 | POST | `/api/admin/pharmacists` | Create pharmacist account |
 | PATCH | `/api/admin/pharmacists/:id/status` | Activate/deactivate pharmacist |
+| DELETE | `/api/admin/pharmacists/:id` | Delete pharmacist (cannot delete self or admin) |
 
 ### Health Check
 | Method | Endpoint | Description |

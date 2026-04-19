@@ -26,8 +26,8 @@ class MedicineService {
       search = '',
       category = '',
       status = '', // 'expired', 'active'
-      sortBy = 'created_at',
-      order = 'desc',
+      sortBy = 'id',
+      order = 'asc',
     } = queryParams;
 
     const offset = (page - 1) * limit;
