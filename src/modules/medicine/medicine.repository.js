@@ -36,13 +36,8 @@ class MedicineRepository {
       sql += ' AND expiry_date >= CURRENT_DATE';
     }
 
-    // Whitelist allowed sort fields to prevent SQL injection
-    const ALLOWED_SORT_FIELDS = ['id', 'name', 'quantity', 'expiry_date', 'category', 'created_at'];
-    const ALLOWED_SORT_ORDERS = ['asc', 'desc'];
-
-    const field = ALLOWED_SORT_FIELDS.includes(sortBy) ? sortBy : 'id';
-    const direction = ALLOWED_SORT_ORDERS.includes(order?.toLowerCase()) ? order.toUpperCase() : 'ASC';
-    sql += ` ORDER BY ${field} ${direction}`;
+    // Default sort by id ascending
+    sql += ' ORDER BY id ASC';
 
     sql += ` LIMIT $${counter} OFFSET $${counter + 1}`;
     values.push(limit, offset);
