@@ -11,7 +11,8 @@ CREATE TABLE users (
     password        VARCHAR(255)    NOT NULL,
     role            user_role       NOT NULL DEFAULT 'pharmacist',
     is_active       BOOLEAN         NOT NULL DEFAULT TRUE,
-    created_at      TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at      TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_users_username ON users(username);
@@ -46,3 +47,17 @@ CREATE TRIGGER update_medicines_updated_at
     BEFORE UPDATE ON medicines
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
+
+-- Trigger for users updated_at
+CREATE OR REPLACE FUNCTION update_users_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_users_updated_at
+    BEFORE UPDATE ON users
+    FOR EACH ROW
+    EXECUTE FUNCTION update_users_updated_at();

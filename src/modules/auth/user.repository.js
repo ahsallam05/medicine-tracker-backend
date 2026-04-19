@@ -16,7 +16,7 @@ class UserRepository {
   }
 
   static async findById(id) {
-    const sql = 'SELECT id, name, username, role, is_active, created_at FROM users WHERE id = $1';
+    const sql = 'SELECT id, name, username, role, is_active, created_at, updated_at FROM users WHERE id = $1';
     return await Database.queryOne(sql, [id]);
   }
 
@@ -25,19 +25,19 @@ class UserRepository {
     const sql = `
       INSERT INTO users (name, username, password, role, is_active)
       VALUES ($1, $2, $3, $4, $5)
-      RETURNING id, name, username, role, is_active, created_at
+      RETURNING id, name, username, role, is_active, created_at, updated_at
     `;
     const result = await Database.query(sql, [name, username, password, role, true]);
     return result.rows[0];
   }
 
   static async findAllByRole(role) {
-    const sql = 'SELECT id, name, username, role, is_active, created_at FROM users WHERE role = $1 ORDER BY created_at DESC';
+    const sql = 'SELECT id, name, username, role, is_active, created_at, updated_at FROM users WHERE role = $1 ORDER BY created_at DESC';
     return await Database.queryAll(sql, [role]);
   }
 
   static async updateStatus(id, isActive) {
-    const sql = 'UPDATE users SET is_active = $1 WHERE id = $2 RETURNING id, name, username, role, is_active, created_at';
+    const sql = 'UPDATE users SET is_active = $1 WHERE id = $2 RETURNING id, name, username, role, is_active, created_at, updated_at';
     return await Database.queryOne(sql, [isActive, id]);
   }
 
