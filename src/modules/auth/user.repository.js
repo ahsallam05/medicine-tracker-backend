@@ -40,6 +40,12 @@ class UserRepository {
     const sql = 'UPDATE users SET is_active = $1 WHERE id = $2 RETURNING id, name, username, role, is_active, created_at';
     return await Database.queryOne(sql, [isActive, id]);
   }
+
+  static async delete(id) {
+    const sql = 'DELETE FROM users WHERE id = $1 RETURNING id';
+    const result = await Database.query(sql, [id]);
+    return result.rowCount > 0;
+  }
 }
 
 export default UserRepository;

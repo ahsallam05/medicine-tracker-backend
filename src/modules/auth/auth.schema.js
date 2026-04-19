@@ -14,11 +14,11 @@
 import Joi from 'joi';
 
 export const loginSchema = Joi.object({
-  username: Joi.string().alphanum().min(3).max(50).required().messages({
+  username: Joi.string().pattern(/^[a-zA-Z0-9_-]+$/).min(3).max(50).required().messages({
     'string.empty': 'Username is required',
     'string.min': 'Username must be at least 3 characters',
     'string.max': 'Username cannot exceed 50 characters',
-    'string.alphanum': 'Username must contain only letters and numbers',
+    'string.pattern.base': 'Username can only contain letters, numbers, underscores, and hyphens',
   }),
   password: Joi.string().min(6).max(255).required().messages({
     'string.empty': 'Password is required',
@@ -31,11 +31,11 @@ export const createUserSchema = Joi.object({
     'string.empty': 'Name is required',
     'string.max': 'Name cannot exceed 100 characters',
   }),
-  username: Joi.string().alphanum().min(3).max(50).required().messages({
+  username: Joi.string().pattern(/^[a-zA-Z0-9_-]+$/).min(3).max(50).required().messages({
     'string.empty': 'Username is required',
     'string.min': 'Username must be at least 3 characters',
     'string.max': 'Username cannot exceed 50 characters',
-    'string.alphanum': 'Username must contain only letters and numbers',
+    'string.pattern.base': 'Username can only contain letters, numbers, underscores, and hyphens',
   }),
   password: Joi.string().min(6).max(255).required().messages({
     'string.empty': 'Password is required',

@@ -40,6 +40,20 @@ class AdminController {
       next(error);
     }
   }
+
+  static async deletePharmacist(req, res, next) {
+    try {
+      const { id } = req.params;
+      const adminId = req.user.id;
+      await AdminService.deletePharmacist(id, adminId);
+      res.status(200).json({
+        status: 'success',
+        message: 'Pharmacist deleted successfully',
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default AdminController;

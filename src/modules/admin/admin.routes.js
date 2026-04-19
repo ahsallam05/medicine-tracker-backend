@@ -7,7 +7,9 @@ const router = express.Router();
 
 const createPharmacistSchema = Joi.object({
   name: Joi.string().required().trim().min(2).max(100),
-  username: Joi.string().required().trim().min(3).max(50),
+  username: Joi.string().pattern(/^[a-zA-Z0-9_-]+$/).required().trim().min(3).max(50).messages({
+    'string.pattern.base': 'Username can only contain letters, numbers, underscores, and hyphens',
+  }),
   password: Joi.string().required().min(6),
 });
 
@@ -27,5 +29,8 @@ router.get('/pharmacists', AdminController.getAllPharmacists);
 
 // Deactivate/reactivate pharmacist account
 router.patch('/pharmacists/:id/status', validate(toggleStatusSchema), AdminController.togglePharmacistStatus);
+
+// Delete pharmacist account
+router.delete('/pharmacists/:id', AdminController.deletePharmacist);
 
 export default router;
