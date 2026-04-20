@@ -75,23 +75,28 @@ psql -U your_username -d your_database -f src/utils/schema.sql
 
 ### 4. Seed the Database
 
-**Step 1: Create the default admin account**
+**Option A: Seed everything at once (admin + users + medicines)**
 
 ```bash
+npm run seed:all
+```
+
+This runs all seeders in sequence:
+1. Creates the admin user (default: admin/admin123)
+2. Creates 5 pharmacist accounts (password: pharma123)
+3. Inserts 1000 medicines with various categories and expiry dates
+
+**Option B: Seed individually**
+
+```bash
+# Only admin account
 npm run seed
-```
 
-This creates the admin user with credentials from your `.env` file (default: admin/admin123).
+# Only pharmacist accounts (5 users)
+npm run seed:users
 
-**Step 2: Add mock data (optional, for testing)**
-
-```bash
-npm run seed:mock
-```
-
-This adds:
-- 5 pharmacist accounts (ahmed, mohamed, mostafa, ramez, sayed) with password `pharma123`
-- 30 sample medicines covering all alert scenarios
+# Only medicines (1000 items)
+npm run seed:medicines
 
 ### 5. Start the Server
 
@@ -160,10 +165,12 @@ The API will be available at `http://localhost:3000`
 ## Available Scripts
 
 ```bash
-npm start          # Start production server
-npm run dev        # Start development server with nodemon
-npm run seed       # Seed default admin (clears all data first)
-npm run seed:mock  # Seed mock data (pharmacists + 30 medicines)
+npm start              # Start production server
+npm run dev            # Start development server with nodemon
+npm run seed           # Seed only admin account
+npm run seed:users     # Seed only 5 pharmacist accounts
+npm run seed:medicines # Seed only 1000 medicines
+npm run seed:all       # Run all seeders
 ```
 
 ## Testing the API
@@ -232,9 +239,12 @@ medicine_tracker/
 │   ├── patterns/
 │   │   └── AlertFactory.js    # Factory pattern for alerts
 │   └── utils/
-│       ├── schema.sql         # Database schema
-│       ├── seed.js            # Admin seeder
-│       └── seed_mock_data.js  # Mock data seeder
+│       ├── schema.sql           # Database schema
+│       ├── seed.js              # Admin seeder
+│       ├── seed_users.js        # Pharmacist accounts seeder
+│       ├── seed_medicines.js    # Medicine data seeder (1000 items)
+│       ├── seed_medicines.sql   # SQL data for medicines
+│       └── mock_data.sql        # Sample SQL for reference
 ├── .env                       # Environment variables (not in git)
 ├── .env.example               # Example env file
 ├── package.json

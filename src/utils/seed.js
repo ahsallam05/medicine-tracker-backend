@@ -40,9 +40,9 @@ async function seedDatabase() {
     const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, saltRounds);
 
     const result = await Database.query(
-      `INSERT INTO users (name, username, password, role, is_active)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING id, username, role, is_active, created_at`,
+      `INSERT INTO users (name, username, password, role, is_active, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+       RETURNING id, username, role, is_active, created_at, updated_at`,
       ['Default Administrator', ADMIN_USERNAME, hashedPassword, 'admin', true]
     );
 
@@ -53,6 +53,7 @@ async function seedDatabase() {
     console.log(`  Role: ${admin.role}`);
     console.log(`  Active: ${admin.is_active}`);
     console.log(`  Created: ${admin.created_at}`);
+    console.log(`  Updated: ${admin.updated_at}`);
     console.log('\nIMPORTANT: Change the admin password after first login!');
 
     await Database.close();

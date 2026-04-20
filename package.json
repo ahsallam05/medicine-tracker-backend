@@ -8,7 +8,9 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "seed": "node src/utils/seed.js",
-    "seed:mock": "node src/utils/seed_mock_data.js",
+    "seed:users": "node src/utils/seed_users.js",
+    "seed:medicines": "node src/utils/seed_medicines.js",
+    "seed:all": "node src/utils/seed.js && node src/utils/seed_users.js && node src/utils/seed_medicines.js",
     "build": "echo 'No build step needed for Node.js backend'",
     "test": "echo 'Tests not implemented in this version'"
   },
