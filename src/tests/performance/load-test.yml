@@ -1,0 +1,22 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 20
+      arrivalRate: 5
+      name: Warm up
+    - duration: 30
+      arrivalRate: 10
+      rampTo: 50
+      name: Ramp up load
+    - duration: 30
+      arrivalRate: 50
+      name: Sustained heavy load
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Health Check (Tests Middleware Chain)"
+    flow:
+      - get:
+          url: "/health"

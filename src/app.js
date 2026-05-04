@@ -38,7 +38,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(limiter);
+
+// app.use(limiter);
+if (NODE_ENV !== 'test') {
+  app.use(limiter);
+}
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
