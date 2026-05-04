@@ -162,50 +162,63 @@ The API will be available at `http://localhost:3000`
 |--------|----------|-------------|
 | GET | `/health` | API health status |
 
+## Design Patterns Implemented
+
+This project follows several core design patterns to ensure scalability and clean architecture:
+
+1.  **Singleton — [Database.js](file:///src/config/Database.js)**: Ensures only one PostgreSQL connection pool is shared across the entire application.
+2.  **Factory Method — [AlertFactory.js](file:///src/patterns/AlertFactory.js)**: Centralizes the logic for creating different alert types (Expired, Critical, Out of Stock, etc.) based on medicine status.
+3.  **Facade — [MedicineService.js](file:///src/modules/medicine/MedicineService.js)**: Provides a simplified interface for all medicine-related operations, hiding the complexity of repositories and pagination logic.
+4.  **Chain of Responsibility — [Middleware Pipeline](file:///src/patterns/middleware/)**: A chain of independent handlers (Auth -> Role -> Validation) that process incoming requests sequentially.
+
+## Testing Suite
+
+The system includes 37 unit tests and a performance testing suite to ensure reliability and speed.
+
+### 1. Unit Testing (Jest)
+Covers all 4 design patterns with 37 test cases.
+```bash
+npm test
+```
+
+### 2. Performance Testing (Artillery)
+Simulates high traffic (up to 50 users/sec) to measure latency and throughput.
+```bash
+npm run test:perf
+```
+
+### 3. Logic Benchmarking
+Measures the computational speed of the design patterns (e.g., processing 10,000 items).
+```bash
+npm run test:benchmark
+```
+
 ## Available Scripts
 
 ```bash
 npm start              # Start production server
 npm run dev            # Start development server with nodemon
-npm run seed           # Seed only admin account
-npm run seed:users     # Seed only 5 pharmacist accounts
-npm run seed:medicines # Seed only 1000 medicines
-npm run seed:all       # Run all seeders
+npm test               # Run all 37 unit tests
+npm run test:perf      # Run API load performance test
+npm run test:benchmark # Run logic/design pattern benchmark
+npm run seed:all       # Seed admin + pharmacists + 1000 medicines
 ```
 
-## Testing the API
+## Project Structure
 
-### 1. Login as Admin
-
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username": "admin", "password": "admin123"}'
 ```
-
-Response:
-```json
-{
-  "status": "success",
-  "message": "Login successful",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiIs...",
-    "user": {
-      "id": 1,
-      "username": "admin",
-      "role": "admin"
-    }
-  }
-}
-```
-
-### 2. Use the Token
-
-Include the token in the `Authorization` header for protected routes:
-
-```bash
-curl -X GET http://localhost:3000/api/medicines \
-  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+medicine_tracker/
+├── src/
+│   ├── app.js                 # Entry point
+│   ├── config/                # [Singleton] DB Configuration
+│   ├── middleware/            # Global Middlewares
+│   ├── modules/               # [Facade] Business Logic Modules
+│   ├── patterns/              # [Factory/Chain] Pattern Implementations
+│   ├── tests/                 # Unit & Performance Test Suites
+│   └── utils/                 # DB Schema & Seeders
+├── babel.config.cjs           # Jest ESM Configuration
+├── package.json
+└── README.md                  # This file
 ```
 
 ## Alert Categories
@@ -219,37 +232,6 @@ The system computes five types of alerts:
 | **EXPIRING_SOON** | Expires within 30 days | MEDIUM |
 | **OUT_OF_STOCK** | Quantity = 0 | HIGH |
 | **RUNNING_LOW** | Quantity ≤ 10 | MEDIUM |
-
-## Project Structure
-
-```
-medicine_tracker/
-├── src/
-│   ├── app.js                 # Express app entry point
-│   ├── config/
-│   │   └── Database.js        # PostgreSQL Singleton connection
-│   ├── middleware/
-│   │   └── errorHandler.js    # Global error handling
-│   ├── modules/
-│   │   ├── auth/              # Authentication module
-│   │   ├── medicine/          # Medicine CRUD module
-│   │   ├── alerts/            # Alert computation module
-│   │   ├── dashboard/         # Statistics module
-│   │   └── admin/             # Admin management module
-│   ├── patterns/
-│   │   └── AlertFactory.js    # Factory pattern for alerts
-│   └── utils/
-│       ├── schema.sql           # Database schema
-│       ├── seed.js              # Admin seeder
-│       ├── seed_users.js        # Pharmacist accounts seeder
-│       ├── seed_medicines.js    # Medicine data seeder (1000 items)
-│       ├── seed_medicines.sql   # SQL data for medicines
-│       └── mock_data.sql        # Sample SQL for reference
-├── .env                       # Environment variables (not in git)
-├── .env.example               # Example env file
-├── package.json
-└── README.md                  # This file
-```
 
 ## Deployment
 
