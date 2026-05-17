@@ -1,16 +1,3 @@
-/*
-  DESIGN PATTERN: CHAIN OF RESPONSIBILITY
-
-  AuthHandler is the first handler in the request validation chain.
-
-  Responsibility: Extract and verify JWT token from the Authorization header.
-
-  If token is missing, malformed, or expired → reject with 401 Unauthorized
-  If token is valid → attach user data to req.user and call next()
-
-  The next handler in the chain receives the validated request.
-*/
-
 import jwt from 'jsonwebtoken';
 import Database from '../../config/Database.js';
 

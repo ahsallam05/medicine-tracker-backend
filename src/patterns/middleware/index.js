@@ -1,10 +1,3 @@
-/*
-  Middleware Export Utilities
-
-  Provides easy-to-use wrapper functions for the middleware handlers.
-  These wrappers are used in route definitions.
-*/
-
 import AuthHandler from './AuthHandler.js';
 import RoleHandler from './RoleHandler.js';
 import ValidationHandler from './ValidationHandler.js';

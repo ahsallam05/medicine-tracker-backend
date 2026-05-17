@@ -1,13 +1,3 @@
-/*
-  Global Error Handling Middleware
-
-  This middleware catches ALL unhandled errors in the application.
-  It runs last in the middleware chain (after all routes).
-
-  In development: returns full error details and stack trace
-  In production: returns only generic message to prevent information leakage
-*/
-
 const errorHandler = (err, req, res, next) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
 

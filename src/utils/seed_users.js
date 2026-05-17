@@ -1,11 +1,3 @@
-/*
-  Users Seeder
-
-  Seeds the database with pharmacist accounts.
-
-  Run with: npm run seed:users
-*/
-
 import 'dotenv/config';
 import Database from '../config/Database.js';
 
@@ -24,9 +16,7 @@ async function seedUsers() {
       process.exit(0);
     }
 
-    // ============================================================================
     // SEED PHARMACISTS (5 accounts)
-    // ============================================================================
     console.log('👤 Creating pharmacist accounts...');
 
     const pharmacists = [
@@ -47,9 +37,7 @@ async function seedUsers() {
       console.log(`   ✓ ${p.name} (${p.username})`);
     }
 
-    // ============================================================================
     // SUMMARY
-    // ============================================================================
     console.log('\n✅ Mock data seeding completed successfully!\n');
     console.log(`  • ${pharmacists.length} pharmacist accounts created (password: "pharma123")`);
     console.log('\nNote: For medicines data, run: npm run seed:medicines');

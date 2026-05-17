@@ -1,7 +1,3 @@
--- ============================================================================
--- MEDICINE EXPIRY TRACKING SYSTEM - DATABASE SCHEMA
--- ============================================================================
-
 CREATE TYPE user_role AS ENUM ('admin', 'pharmacist');
 
 CREATE TABLE users (

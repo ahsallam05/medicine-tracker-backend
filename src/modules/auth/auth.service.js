@@ -1,15 +1,3 @@
-/*
-  Auth Service
-
-  Contains all business logic for authentication:
-  - Password hashing and comparison (bcrypt)
-  - JWT token generation
-  - User lookup and validation
-
-  The controller delegates all logic to this service.
-  The service does NOT touch Express (no req/res).
-*/
-
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import UserRepository from './user.repository.js';

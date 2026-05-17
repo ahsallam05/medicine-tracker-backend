@@ -1,11 +1,3 @@
-/*
-  Medicines Seeder
-
-  Executes seed_medicines.sql to populate the database with 1000 medicines.
-
-  Run with: npm run seed:medicines
-*/
-
 import 'dotenv/config';
 import Database from '../config/Database.js';
 import { readFileSync } from 'fs';

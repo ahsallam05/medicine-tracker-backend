@@ -1,27 +1,3 @@
-/*
-  TEST SUITE: Facade Pattern — MedicineService.js
-  =================================================
-  Pattern: Facade
-  File under test: src/modules/medicine/MedicineService.js
-
-  What we verify:
-    3.1  createMedicine()   → merges created_by into data and delegates to repo.create
-    3.2  getMedicineById()  → returns medicine when repo finds it
-    3.3  getMedicineById()  → throws 'Medicine not found' when repo returns undefined
-    3.4  getAllMedicines()  → calculates correct pagination object
-    3.5  getAllMedicines()  → uses safe default params when called with empty object
-    3.6  updateMedicine()  → merges partial update with existing fields
-    3.7  updateMedicine()  → throws 'Medicine not found' when medicine doesn't exist
-    3.8  deleteMedicine()  → returns true when repo confirms deletion
-    3.9  deleteMedicine()  → throws 'Medicine not found' when repo returns falsy
-
-  Mocking strategy:
-    - MedicineRepository is mocked entirely — every method is a jest.fn()
-    - This isolates MedicineService's own logic (pagination math, merging, error handling)
-      from any real database behaviour.
-*/
-
-// Mock must be declared before any imports (Jest hoists this call)
 jest.mock('../modules/medicine/medicine.repository.js', () => ({
   __esModule: true,
   default: {
@@ -37,7 +13,7 @@ jest.mock('../modules/medicine/medicine.repository.js', () => ({
 import MedicineRepository from '../modules/medicine/medicine.repository.js';
 import MedicineService    from '../modules/medicine/MedicineService.js';
 
-// ─── Shared fixtures ────────────────────────────────────────────────────────
+// Shared fixtures
 const fakeMedicine = {
   id:          1,
   name:        'Aspirin',
@@ -46,13 +22,11 @@ const fakeMedicine = {
   category:    'Painkiller',
 };
 
-// ─── Tests ──────────────────────────────────────────────────────────────────
 describe('Facade Pattern — MedicineService', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  // ─── TC 3.1 ────────────────────────────────────────────────────────────────
   test('3.1 createMedicine() merges created_by and calls repo.create', async () => {
     MedicineRepository.create.mockResolvedValue(fakeMedicine);
 
@@ -65,7 +39,6 @@ describe('Facade Pattern — MedicineService', () => {
     expect(result).toEqual(fakeMedicine);
   });
 
-  // ─── TC 3.2 ────────────────────────────────────────────────────────────────
   test('3.2 getMedicineById() returns the medicine when found', async () => {
     MedicineRepository.findById.mockResolvedValue(fakeMedicine);
 
@@ -75,7 +48,6 @@ describe('Facade Pattern — MedicineService', () => {
     expect(result).toEqual(fakeMedicine);
   });
 
-  // ─── TC 3.3 ────────────────────────────────────────────────────────────────
   test('3.3 getMedicineById() throws "Medicine not found" when repo returns undefined', async () => {
     MedicineRepository.findById.mockResolvedValue(undefined);
 
@@ -83,7 +55,6 @@ describe('Facade Pattern — MedicineService', () => {
     await expect(MedicineService.getMedicineById(999)).rejects.toThrow('Medicine not found');
   });
 
-  // ─── TC 3.4 ────────────────────────────────────────────────────────────────
   test('3.4 getAllMedicines() returns correct pagination metadata', async () => {
     MedicineRepository.findAll.mockResolvedValue(Array(10).fill(fakeMedicine));
     MedicineRepository.count.mockResolvedValue(25);
@@ -100,7 +71,6 @@ describe('Facade Pattern — MedicineService', () => {
     expect(result.medicines).toHaveLength(10);
   });
 
-  // ─── TC 3.5 ────────────────────────────────────────────────────────────────
   test('3.5 getAllMedicines() uses default params safely when called with {}', async () => {
     MedicineRepository.findAll.mockResolvedValue([fakeMedicine]);
     MedicineRepository.count.mockResolvedValue(1);
@@ -113,7 +83,6 @@ describe('Facade Pattern — MedicineService', () => {
     expect(result.pagination.pages).toBe(1);
   });
 
-  // ─── TC 3.6 ────────────────────────────────────────────────────────────────
   test('3.6 updateMedicine() merges partial update with existing medicine fields', async () => {
     MedicineRepository.findById.mockResolvedValue(fakeMedicine);
     MedicineRepository.update.mockResolvedValue({ ...fakeMedicine, quantity: 20 });
@@ -122,15 +91,14 @@ describe('Facade Pattern — MedicineService', () => {
     const result = await MedicineService.updateMedicine(1, { quantity: 20 });
 
     expect(MedicineRepository.update).toHaveBeenCalledWith(1, {
-      name:        fakeMedicine.name,        // kept from existing
-      quantity:    20,                       // updated
-      expiry_date: fakeMedicine.expiry_date, // kept from existing
-      category:    fakeMedicine.category,    // kept from existing
+      name:        fakeMedicine.name,        
+      quantity:    20,                       
+      expiry_date: fakeMedicine.expiry_date, 
+      category:    fakeMedicine.category,    
     });
     expect(result.quantity).toBe(20);
   });
 
-  // ─── TC 3.7 ────────────────────────────────────────────────────────────────
   test('3.7 updateMedicine() throws "Medicine not found" when medicine does not exist', async () => {
     MedicineRepository.findById.mockResolvedValue(undefined);
 
@@ -140,7 +108,6 @@ describe('Facade Pattern — MedicineService', () => {
     expect(MedicineRepository.update).not.toHaveBeenCalled();
   });
 
-  // ─── TC 3.8 ────────────────────────────────────────────────────────────────
   test('3.8 deleteMedicine() returns true when repo confirms deletion', async () => {
     MedicineRepository.delete.mockResolvedValue(true);
 
@@ -150,7 +117,6 @@ describe('Facade Pattern — MedicineService', () => {
     expect(result).toBe(true);
   });
 
-  // ─── TC 3.9 ────────────────────────────────────────────────────────────────
   test('3.9 deleteMedicine() throws "Medicine not found" when repo returns falsy', async () => {
     MedicineRepository.delete.mockResolvedValue(false);
 

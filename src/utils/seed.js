@@ -1,12 +1,3 @@
-/*
-  Database Seeder
-
-  Clears all existing data and creates a fresh admin account.
-  WARNING: This will DELETE all existing data!
-
-  Run with: npm run seed
-*/
-
 import 'dotenv/config';
 import bcrypt from 'bcryptjs';
 import Database from '../config/Database.js';
@@ -18,9 +9,7 @@ async function seedDatabase() {
   try {
     console.log('Starting database seeding...\n');
 
-    // ============================================================================
     // CLEAR ALL EXISTING DATA
-    // ============================================================================
     console.log('🗑️  Clearing existing data...');
 
     // Delete medicines first (due to foreign key constraint)

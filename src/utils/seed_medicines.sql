@@ -1,12 +1,3 @@
--- ============================================================
--- MEDICINE EXPIRY TRACKING SYSTEM - SEED DATA
--- 143 unique rows | Generated: 2026-04-20
--- ─────────────────────────────────────────────────────────────
--- Quantity  : 7 out-of-stock (qty=0) | 20 running-low (1-15) | 116 normal (16-50)
--- Expiry    : 14 expired (-1 to -180 days) | 129 future (+1 to +365 days)
--- created_by: NULL
--- ============================================================
-
 INSERT INTO medicines (name, quantity, expiry_date, category, created_by, created_at, updated_at) VALUES
   ('Donepezil 10mg', 14, '2026-01-15', 'Neurological', NULL, '2025-05-20 23:00:00', '2026-03-19 00:00:00'),
   ('Vitamin B12 1000mcg', 21, '2027-02-28', 'Supplements', NULL, '2026-01-15 00:00:00', '2026-02-24 00:00:00'),

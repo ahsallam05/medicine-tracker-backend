@@ -1,10 +1,3 @@
-/*
-  User Repository
-
-  Handles all database queries related to users.
-  Repositories use parameterized SQL to prevent SQL injection.
-*/
-
 import Database from '../../config/Database.js';
 
 class UserRepository {

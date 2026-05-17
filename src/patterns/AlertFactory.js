@@ -1,16 +1,3 @@
-/*
-  DESIGN PATTERN: FACTORY METHOD
-
-  Purpose: Define an interface for creating objects, but let subclasses decide
-  which class to instantiate. In our case, AlertFactory decides which specific
-  alert type (Expired, Critical, etc.) to create based on a medicine's data.
-
-  How it works:
-  - AlertFactory.createAlerts(medicine) returns an array of alert objects
-  - Each alert object has a consistent interface (type, severity, message)
-  - New alert types can be added without changing the core business logic
-*/
-
 class Alert {
   constructor(medicine, type, severity, message) {
     this.medicine_id = medicine.id;

@@ -1,20 +1,3 @@
-/*
-  DESIGN PATTERN: SINGLETON
-
-  Purpose: Ensure only one PostgreSQL connection pool exists for the entire application.
-  Creating multiple pools wastes system resources. This class guarantees a single,
-  shared instance across all modules.
-
-  How it works:
-  - First call to getInstance() creates the pool and stores it in #instance
-  - Subsequent calls return the same instance
-  - All repositories import this and call Database.getInstance().query()
-
-  Configuration:
-  - Production (NODE_ENV=production): Uses DATABASE_URL with SSL enabled
-  - Local Development: Uses individual DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
-*/
-
 import pg from 'pg';
 
 const { Pool } = pg;
@@ -28,7 +11,7 @@ class Database {
       let config;
 
       if (process.env.DATABASE_URL) {
-        // Use DATABASE_URL if provided (Railway/Neon production or local with URL)
+        
         config = {
           connectionString: process.env.DATABASE_URL,
           max: 10,
@@ -41,7 +24,7 @@ class Database {
           config.ssl = { rejectUnauthorized: false };
         }
       } else {
-        // Use individual connection parameters for local development
+        
         config = {
           host: process.env.DB_HOST,
           port: parseInt(process.env.DB_PORT || '5432', 10),

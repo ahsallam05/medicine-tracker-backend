@@ -1,16 +1,3 @@
-/*
-  DESIGN PATTERN: FACADE
-
-  Purpose: Provide a single, simplified interface for all medicine-related operations.
-  Controllers should not need to know about repositories, pagination logic, or complex filtering.
-  They just call methods on the MedicineService facade.
-
-  How it works:
-  - MedicineService combines operations from repositories.
-  - It handles common tasks like formatting responses and calculating pagination metadata.
-  - It acts as a gateway for the medicine module.
-*/
-
 import MedicineRepository from './medicine.repository.js';
 
 class MedicineService {
@@ -25,7 +12,7 @@ class MedicineService {
       limit = 10,
       search = '',
       category = '',
-      status = '', // 'expired', 'active'
+      status = '', 
       sortBy = 'id',
       order = 'asc',
     } = queryParams;
@@ -61,8 +48,7 @@ class MedicineService {
     if (!existing) {
       throw new Error('Medicine not found');
     }
-    
-    // Merge existing data with new data
+
     const updatedData = {
       name: medicineData.name !== undefined ? medicineData.name : existing.name,
       quantity: medicineData.quantity !== undefined ? medicineData.quantity : existing.quantity,

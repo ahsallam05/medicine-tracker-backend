@@ -1,16 +1,3 @@
-/*
-  Auth Validation Schemas (Joi)
-
-  Joi schemas validate request bodies before they reach controllers.
-  These are passed to ValidationHandler middleware.
-
-  Joi provides:
-  - Type checking (string, number, etc.)
-  - Required/optional fields
-  - Length constraints
-  - Custom error messages
-*/
-
 import Joi from 'joi';
 
 export const loginSchema = Joi.object({

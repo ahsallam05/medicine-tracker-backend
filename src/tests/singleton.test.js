@@ -1,20 +1,3 @@
-/*
-  TEST SUITE: Singleton Pattern — Database.js
-  ============================================
-  Pattern: Singleton
-  File under test: src/config/Database.js
-
-  What we verify:
-    1. getInstance() returns an object (basic sanity)
-    2. Multiple calls return the EXACT same reference (===) — core Singleton guarantee
-    3. Ten calls all share the same reference (stress test)
-    4. close() resets the instance so the next call creates a fresh one
-
-  Mocking strategy:
-    - We mock the 'pg' module so no real PostgreSQL connection is opened.
-    - pg.Pool is replaced with a Jest constructor spy.
-*/
-
 jest.mock('pg', () => {
   const MockPool = jest.fn().mockImplementation(() => ({
     on: jest.fn(),
@@ -30,20 +13,18 @@ import Database from '../config/Database.js';
 const { Pool: MockPool } = pg;
 
 describe('Singleton Pattern — Database', () => {
-  // Reset the singleton and mock call counts after every test
+  
   afterEach(async () => {
-    await Database.close();   // sets #instance = null
-    MockPool.mockClear();     // resets call counter
+    await Database.close();   
+    MockPool.mockClear();     
   });
 
-  // ─── TC 1.1 ────────────────────────────────────────────────────────────────
   test('1.1 getInstance() returns a defined object', () => {
     const instance = Database.getInstance();
     expect(instance).toBeDefined();
     expect(typeof instance).toBe('object');
   });
 
-  // ─── TC 1.2 ────────────────────────────────────────────────────────────────
   test('1.2 two consecutive calls return the exact same reference (===)', () => {
     const firstCall  = Database.getInstance();
     const secondCall = Database.getInstance();
@@ -52,7 +33,6 @@ describe('Singleton Pattern — Database', () => {
     expect(firstCall).toBe(secondCall);
   });
 
-  // ─── TC 1.3 ────────────────────────────────────────────────────────────────
   test('1.3 ten consecutive calls all return the same reference', () => {
     const instances = Array.from({ length: 10 }, () => Database.getInstance());
 
@@ -63,13 +43,11 @@ describe('Singleton Pattern — Database', () => {
     expect(MockPool).toHaveBeenCalledTimes(1);
   });
 
-  // ─── TC 1.4 ────────────────────────────────────────────────────────────────
   test('1.4 close() resets instance — next call creates a brand new pool', async () => {
-    const first = Database.getInstance();   // Pool called once → instance A
-    await Database.close();                 // #instance = null
-    const second = Database.getInstance(); // Pool called again → instance B
+    const first = Database.getInstance();   
+    await Database.close();                 
+    const second = Database.getInstance(); 
 
-    // Must be different objects — the singleton was reset
     expect(second).not.toBe(first);
 
     // Pool constructor must have been called exactly TWICE
