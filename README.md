@@ -80,6 +80,7 @@ The API is configured for seamless deployment on **Railway** connected to a serv
 
 *   **Production API URL:** `https://medicine-tracker-backend.up.railway.app`
 *   **Health Check Endpoint:** `https://medicine-tracker-backend.up.railway.app/health`
+*   **Frontend Test URL:** `https://my-medicine-tracker.netlify.app/`
 
 ---
 
