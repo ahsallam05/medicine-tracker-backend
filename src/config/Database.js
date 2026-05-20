@@ -16,7 +16,7 @@ class Database {
           connectionString: process.env.DATABASE_URL,
           max: 10,
           idleTimeoutMillis: 30000,
-          connectionTimeoutMillis: 2000,
+          connectionTimeoutMillis: 10000,
         };
 
         // Enable SSL in production for Neon/Railway
@@ -33,7 +33,7 @@ class Database {
           password: process.env.DB_PASSWORD,
           max: 10,
           idleTimeoutMillis: 30000,
-          connectionTimeoutMillis: 2000,
+          connectionTimeoutMillis: 10000,
         };
       }
 
