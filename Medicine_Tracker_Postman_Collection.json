@@ -425,6 +425,11 @@
 			"type": "string"
 		},
 		{
+			"key": "productionUrl",
+			"value": "https://medicine-tracker-backend.up.railway.app",
+			"type": "string"
+		},
+		{
 			"key": "token",
 			"value": "PASTE_JWT_TOKEN_HERE",
 			"type": "string"
