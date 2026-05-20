@@ -71,3 +71,26 @@ npm start
 *   `npm run dev` - Starts the development server with live reload.
 *   `npm run seed:all` - Seeds admin, pharmacists, and medicines.
 *   `npm test` - Runs Jest unit tests.
+
+---
+
+## ☁️ Live Deployment
+
+The API is configured for seamless deployment on **Railway** connected to a serverless **Neon PostgreSQL** database.
+
+*   **Production API URL:** `https://medicine-tracker-backend.up.railway.app`
+*   **Health Check Endpoint:** `https://medicine-tracker-backend.up.railway.app/health`
+
+---
+
+## 🧪 API Testing (Postman)
+
+A pre-configured Postman collection is available in the root of the project to test all endpoints:
+👉 **[Medicine_Tracker_Postman_Collection.json](file:///c:/Users/ahmed/repos/medicine-tracker-backend/Medicine_Tracker_Postman_Collection.json)**
+
+### How to use:
+1.  **Import the Collection:** Open Postman, click **Import**, and choose the `Medicine_Tracker_Postman_Collection.json` file.
+2.  **Set Up Variables:** Edit the imported collection's **Variables** tab:
+    *   Set `baseUrl` to `http://localhost:3000` for local testing, or set it to `https://medicine-tracker-backend-production.up.railway.app` for production.
+    *   Set `token` after authenticating to store your JWT token.
+3.  **Execute Requests:** Run **Admin Login** or **Pharmacist Login**, copy the returned JWT, and save it in the collection's `token` variable. All other routes will automatically authenticate using this token!
