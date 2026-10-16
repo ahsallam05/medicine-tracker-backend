@@ -77,7 +77,7 @@ npm start
 ## 🧪 API Testing (Postman)
 
 A pre-configured Postman collection is available in the root of the project to test all endpoints:
-👉 **[Medicine_Tracker_Postman_Collection.json](file:///c:/Users/ahmed/repos/medicine-tracker-backend/Medicine_Tracker_Postman_Collection.json)**
+👉 **[Medicine_Tracker_Postman_Collection.json]**
 
 ### How to use:
 1.  **Import the Collection:** Open Postman, click **Import**, and choose the `Medicine_Tracker_Postman_Collection.json` file.
