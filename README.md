@@ -74,20 +74,10 @@ npm start
 
 ---
 
-## ☁️ Live Deployment
-
-The API is configured for seamless deployment on **Railway** connected to a serverless **Neon PostgreSQL** database.
-
-*   **Production API URL:** `https://medicine-tracker-backend.up.railway.app`
-*   **Health Check Endpoint:** `https://medicine-tracker-backend.up.railway.app/health`
-*   **Frontend Test URL:** `https://my-medicine-tracker.netlify.app/`
-
----
-
 ## 🧪 API Testing (Postman)
 
 A pre-configured Postman collection is available in the root of the project to test all endpoints:
-👉 **[Medicine_Tracker_Postman_Collection.json](file:///c:/Users/ahmed/repos/medicine-tracker-backend/Medicine_Tracker_Postman_Collection.json)**
+👉 **[Medicine_Tracker_Postman_Collection.json]**
 
 ### How to use:
 1.  **Import the Collection:** Open Postman, click **Import**, and choose the `Medicine_Tracker_Postman_Collection.json` file.
